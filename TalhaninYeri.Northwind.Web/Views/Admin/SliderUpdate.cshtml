@@ -1,0 +1,32 @@
+﻿@model SliderAddViewModel
+@{
+    ViewData["Title"] = "Admin - Slider Güncelle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container my-5">
+    <h2>Slider Güncelle</h2>
+    <form asp-controller="Admin" asp-action="SliderUpdate" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="MyImage">Slider Görseli</label>
+            <input asp-for="MyImage" accept="image/*" class="form-control-file" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Slider.Title">Görsel Başlığı</label>
+            <input asp-for="Slider.Title" class="form-control" type="text" placeholder="Başlık" />
+            <span asp-validation-for="Slider.Title"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Slider.Description">Resim Açıklaması</label>
+            <textarea asp-for="Slider.Description" class="form-control" rows="3" placeholder="Resim Açıklaması"></textarea>
+            <span asp-validation-for="Slider.Description"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Slider.OrderNumber">Resim Sırası</label>
+            <input asp-for="Slider.OrderNumber" class="form-control" type="number" placeholder="Resim Sırası" />
+            <span asp-validation-for="Slider.OrderNumber"></span>
+        </div>
+        <input type="hidden" asp-for="Slider.ImagePath" />
+        <input type="hidden" asp-for="Slider.SliderId" />
+        <input type="submit" value="Güncelle" class="btn btn-info" />
+    </form>
+</div>

@@ -1,0 +1,41 @@
+﻿@model ProductModel
+@{ 
+    ViewData["Title"] = "Admin - Ürün Yönetimi";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container my-5">
+    <h2>Ürün Listesi</h2>
+    <a class="btn btn-sm btn-success my-3" asp-area="" asp-controller="Admin" asp-action="ProductAdd"><i class="fa fa-plus"></i> Yeni Ürün Ekle</a>
+    <div class="table-responsive">
+        <table id="productDT">
+            <thead>
+                <tr>
+                    <th>Ürün Resmi</th>
+                    <th>Kategori</th>
+                    <th>Ürün Adı</th>
+                    <th>Ürün Fiyatı</th>
+                    <th>Stok Adedi</th>
+                    <th>Oluşturma Tarihi</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Products)
+                {
+                    string categoryName = Model.Categories.Where(c => c.CategoryId == item.CategoryId).FirstOrDefault().CategoryName;
+                    <tr>
+                        <td><img class="cartListImg" src="~/img/product-thumb/@item.ImagePath" onerror="this.src='/Images/resim-yok.jpg'" /></td>
+                        <td>@categoryName</td>
+                        <td>@item.ProductName</td>
+                        <td class="price">@item.UnitPrice</td>
+                        <td>@item.UnitsInStock</td>
+                        <td>@item.Date</td>
+                        <td><a class="btn btn-sm btn-info" asp-area="" asp-controller="Admin" asp-action="ProductUpdate" asp-route-productId="@item.ProductId"><i class="fas fa-sync-alt"></i> Güncelle</a></td>
+                        <td><a class="btn btn-sm btn-danger" asp-area="" asp-controller="Admin" asp-action="ProductDelete" asp-route-productId="@item.ProductId"><i class="fas fa-times"></i> Sil</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

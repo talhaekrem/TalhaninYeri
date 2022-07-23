@@ -1,0 +1,82 @@
+﻿@model CartSummaryViewModel
+@{
+    ViewData["Title"] = "Sepet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container my-5">
+    @if (Model.Cart.TotalAmount != 0)
+    {
+        <div class="row">
+            @if (TempData["message"] != null)
+            {
+                <div class="col-12">
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        @TempData["message"]
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            }
+            <div class="col-12 text-center">
+                <h2 class="py-3">Sepetiniz</h2>
+            </div>
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Ürün Resmi</th>
+                                <th scope="col">Ürün Adı</th>
+                                <th scope="col">Ürün Fiyatı</th>
+                                <th scope="col">Miktar</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Cart.CartLines)
+                            {
+                                <tr>
+                                    <td scope="row"><img class="cartListImg" src="~/img/product-thumb/@item.Product.ImagePath" onerror="this.src='/Images/resim-yok.jpg'" /></td>
+                                    <td>@item.Product.ProductName</td>
+                                    <td class="price">@item.Product.UnitPrice</td>
+                                    <td>@item.Quantity</td>
+                                    <td class="text-right"><a class="btn btn-sm btn-danger" asp-controller="Cart" asp-action="Remove" asp-route-productId="@item.Product.ProductId"><i class="fa fa-remove"></i>Sepetten Sil</a></td>
+                                </tr>
+                            }
+                            <tr>
+                                <td scope="row"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-right">Kargo: 7.00 TL<br />Ürünler: <span class="price">@Model.Cart.SubTotal</span> TL<br />Toplam: <strong class="price">@Model.Cart.Total</strong> TL</td>
+                            </tr>
+                            <tr>
+                                <td scope="row"></td>
+                                <td></td>
+                                <td></td>
+                                <td><a asp-controller="Product" asp-action="Index" class="btn btn-sm btn-info"><i class="fa fa-shopping-cart"></i> Alışverişe Devam Et</a></td>
+                                <td class="text-right">
+                                    <a asp-controller="Cart" asp-action="Complete" class="btn btn-sm btn-success"><i class="fa fa-play"></i> Alışverişi Tamamla</a><br />
+                                    <small class="text-muted">*Yalnızca kapıda ödeme mevcuttur.</small>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2>Sepetiniz Boş!</h2><img width="128" height="128" src="~/Images/cart.png" /><br />
+                <a asp-controller="Product" asp-action="Index" class="btn btn-info mt-3"><i class="fa fa-chevron-left"></i> Alışverişe Başla</a>
+            </div>
+        </div>
+    }
+
+
+
+</div>

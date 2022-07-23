@@ -1,0 +1,67 @@
+﻿@model SiteSettingsModel
+@{
+    ViewData["Title"] = "İletişim";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/banner.css" rel="stylesheet" />
+
+<div class="position-relative">
+    <img class="PageBanner" src="~/Images/banners/contact-banner.jpg" />
+    <div class="bannerShadow"></div>
+    <div class="bannerText">
+        <span>İletişim</span>
+    </div>
+</div>
+<div class="breadcrumbNav">
+    <nav aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb px-0 m-0">
+                <li class="breadcrumb-item"><a href="/">Anasayfa</a></li>
+                <li class="breadcrumb-item active" aria-current="page">İletişim</li>
+            </ol>
+        </div>
+    </nav>
+</div>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <h3 class="text-center mb-3">İletişim</h3>
+            <div class="row">
+                <div class="col-12 text-center text-muted">
+                    <h5>Telefon numaramızdan, E-posta adresimizden veya dükkanımıza gelip bizlere ulaşabilirsiniz. Ayrıca sosyal medya hesaplarımızda gelişmeleri takip etmeyi unutmayın.</h5>
+                    <h6>Bir sorunla karşılaştığınızda e-posta adresimize geri bildirim yapabilirsiniz.</h6>
+                </div>
+                <div class="col-12 my-5">
+                    <div class="row text-center">
+
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="font-weight-bold open-sans"><i class="fa fa-phone ContactIcons"></i><br />Telefon</div>
+                            <div class="pt-3"><a class="hoverLinks" href="tel:@Model.siteSetting.Phone">@Model.siteSetting.Phone</a></div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="font-weight-bold open-sans"><i class="fa fa-envelope ContactIcons"></i><br />E-Posta</div>
+                            <div class="pt-3"><a class="hoverLinks" href="mailto:@Model.siteSetting.Email">@Model.siteSetting.Email</a></div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="font-weight-bold open-sans"><i class="fa fa-map-marker ContactIcons"></i><br />Adres</div>
+                            <div class="pt-3">@Model.siteSetting.Address</div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="font-weight-bold open-sans"><i class="fa fa-hashtag ContactIcons"></i><br />Sosyal Medya</div>
+                            <div class="pt-3">
+                                <div class="mb-3"><a class="contactInstagram" href="@Model.siteSetting.Instagram"><i class="fa fa-instagram"></i> Instagram</a></div>
+                                <div class="mb-3"><a class="contactTwitter" href="@Model.siteSetting.Twitter"><i class="fa fa-twitter"></i> Twitter</a></div>
+                                <div><a class="contactYoutube" href="@Model.siteSetting.Youtube"><i class="fa fa-youtube-play"></i> Youtube</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <iframe class="border shadow w-100 d-block" height="450" allowfullscreen="" loading="lazy" src="@Model.siteSetting.GoogleMap"></iframe>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

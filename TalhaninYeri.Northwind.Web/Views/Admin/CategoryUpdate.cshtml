@@ -1,0 +1,17 @@
+﻿@model CategoryModel
+@{
+    ViewData["Title"] = "Admin - Kategori Güncelle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container my-5">
+    <h2>Kategori Güncelle</h2>
+    <form asp-controller="Admin" asp-action="CategoryUpdate" method="post">
+        <div class="form-group">
+            <label asp-for="Category.CategoryName">Kategori Adı</label>
+            <input asp-for="Category.CategoryName" class="form-control" type="text" placeholder="Kategori Adı" />
+            <span asp-validation-for="Category.CategoryName"></span>
+        </div>
+        <input type="hidden" asp-for="Category.CategoryId" />
+        <input type="submit" value="Güncelle" class="btn btn-success" />
+    </form>
+</div>

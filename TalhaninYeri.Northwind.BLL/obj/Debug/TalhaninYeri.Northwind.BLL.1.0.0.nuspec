@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>TalhaninYeri.Northwind.BLL</id>
+    <version>1.0.0</version>
+    <authors>TalhaninYeri.Northwind.BLL</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.1">
+        <dependency id="TalhaninYeri.Core" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="TalhaninYeri.Northwind.DAL" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="TalhaninYeri.Northwind.Entities" version="1.0.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\talha\source\repos\Talha\TalhaninYeri.Northwind.BLL\bin\Debug\netcoreapp3.1\TalhaninYeri.Northwind.BLL.dll" target="lib\netcoreapp3.1\TalhaninYeri.Northwind.BLL.dll" />
+  </files>
+</package>

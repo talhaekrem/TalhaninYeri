@@ -1,0 +1,38 @@
+﻿@model OrdersViewModel
+@{
+    ViewData["Title"] = Model.orderedProduct.OrderID + " nolu sipariş";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container my-5">
+    <h3 class="text-center">@Model.orderedProduct.OrderID nolu sipariş</h3>
+    <div>
+        <h4>@Model.orderedProduct.FirstName @Model.orderedProduct.LastName</h4>
+        <p><b>Adres:</b> @Model.orderedProduct.Address | @Model.orderedProduct.City</p>
+        <p><b>E-Posta:</b> @Model.orderedProduct.Email</p>
+        <p><b>Telefon:</b> @Model.orderedProduct.Phone</p>
+        <p><b>Tutar:</b> <span class="price">@Model.orderedProduct.OrderTotal</span> TL<small class="text-muted"> (7,00 TL Kargo)</small></p>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Ürün ID</th>
+                    <th scope="col">Ürün Adı</th>
+                    <th scope="col">Sipariş Adedi</th>
+                    <th scope="col">Birim Fiyat</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.OrderDetails)
+                {
+                    <tr>
+                        <td scope="row">@item.ProductID</td>
+                        <td>@item.ProductName</td>
+                        <td><span class="badge bg-primary rounded-pill">@item.Quantity</span></td>
+                        <td class="price">@item.UnitPrice</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

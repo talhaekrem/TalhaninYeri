@@ -1,0 +1,10 @@
+C:\Users\talha\source\repos\TalhaninYeri\TalhaninYeri.Core\bin\Release\netcoreapp3.1\TalhaninYeri.Core.deps.json
+C:\Users\talha\source\repos\TalhaninYeri\TalhaninYeri.Core\bin\Release\netcoreapp3.1\TalhaninYeri.Core.dll
+C:\Users\talha\source\repos\TalhaninYeri\TalhaninYeri.Core\bin\Release\netcoreapp3.1\TalhaninYeri.Core.pdb
+C:\Users\talha\source\repos\TalhaninYeri\TalhaninYeri.Core\obj\Release\netcoreapp3.1\TalhaninYeri.Core.AssemblyInfoInputs.cache
+C:\Users\talha\source\repos\TalhaninYeri\TalhaninYeri.Core\obj\Release\netcoreapp3.1\TalhaninYeri.Core.AssemblyInfo.cs
+C:\Users\talha\source\repos\TalhaninYeri\TalhaninYeri.Core\obj\Release\netcoreapp3.1\TalhaninYeri.Core.csproj.CoreCompileInputs.cache
+C:\Users\talha\source\repos\TalhaninYeri\TalhaninYeri.Core\obj\Release\netcoreapp3.1\TalhaninYeri.Core.dll
+C:\Users\talha\source\repos\TalhaninYeri\TalhaninYeri.Core\obj\Release\netcoreapp3.1\TalhaninYeri.Core.pdb
+C:\Users\talha\source\repos\TalhaninYeri\TalhaninYeri.Core\obj\Release\netcoreapp3.1\TalhaninYeri.Core.csproj.AssemblyReference.cache
+C:\Users\talha\source\repos\TalhaninYeri\TalhaninYeri.Core\obj\Release\netcoreapp3.1\TalhaninYeri.Core.GeneratedMSBuildEditorConfig.editorconfig

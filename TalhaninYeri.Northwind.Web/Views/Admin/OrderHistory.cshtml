@@ -1,0 +1,54 @@
+﻿@model OrderHistoryViewModel
+@{
+    ViewData["Title"] = "Admin - Geçmiş Siparişler";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container my-5">
+    <h2>Geçmiş Siparişler</h2>
+    <a class="btn btn-sm btn-primary my-3" href="/Admin#OrdersDT"><i class="fas fa-receipt"></i> Mevcut Siparişler</a>
+    <div class="table-responsive">
+        <table id="OrderHistoryDT">
+            <thead>
+                <tr>
+                    <th>Sipariş ID</th>
+                    <th>Müşteri Ad Soyad</th>
+                    <th>Telefon</th>
+                    <th>E-posta</th>
+                    <th>Adres</th>
+                    <th>Sipariş Tarihi</th>
+                    <th>Teslim Tarihi</th>
+                    <th>Sipariş Tutarı</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    if (Model.OrderList.Count == 0)
+                    {
+                        <tr>
+                            <td class="text-center" colspan="9">Geçmiş sipariş yoktur.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var item in Model.OrderList.OrderByDescending(x => x.OrderDate).Take(100))
+                        {
+                            <tr>
+                                <td>@item.OrderID</td>
+                                <td>@item.FirstName @item.LastName</td>
+                                <td>@item.Phone</td>
+                                <td>@item.Email</td>
+                                <td>@item.Address / @item.City</td>
+                                <td>@item.OrderDate</td>
+                                <td>@item.DeliveredTime</td>
+                                <td class="text-success"><span class="price"><b>@item.OrderTotal</b></span> TL</td>
+                                <td><a class="btn btn-sm btn-primary" asp-area="" asp-controller="Admin" asp-action="OrderDetail" asp-route-orderId="@item.OrderID"><i class="fas fa-external-link-alt"></i> Siparişi Görüntüle</a></td>
+                            </tr>
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

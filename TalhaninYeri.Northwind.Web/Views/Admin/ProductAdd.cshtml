@@ -1,0 +1,48 @@
+﻿@model ProductAddViewModel
+@{
+    ViewData["Title"] = "Admin - Ürün Ekle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container my-5">
+    <h2>Ürün Ekle</h2>
+    <form asp-controller="Admin" asp-action="ProductAdd" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="Product.ProductName">Ürün Adı</label>
+            <input asp-for="Product.ProductName" class="form-control" type="text" placeholder="Ürün Adı" />
+            <span asp-validation-for="Product.ProductName"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Product.Description">Ürün Açıklaması</label>
+            <textarea asp-for="Product.Description" class="form-control" rows="3" placeholder="Ürün Açıklaması"></textarea>
+            <span asp-validation-for="Product.Description"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Product.CategoryId">Kategori Adı</label>
+            <select asp-for="Product.CategoryId" class="form-control" asp-items="@(new SelectList(Model.Categories,"CategoryId","CategoryName"))"></select>
+            <span asp-validation-for="Product.CategoryId"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Product.UnitPrice">Ürün Fiyatı</label>
+            <input asp-for="Product.UnitPrice" class="form-control" type="text" placeholder="Ürün Fiyatı" />
+            <span asp-validation-for="Product.UnitPrice"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Product.UnitsInStock">Stok Adedi</label>
+            <input asp-for="Product.UnitsInStock" class="form-control" type="text" placeholder="Stok Adedi" />
+            <span asp-validation-for="Product.UnitsInStock"></span>
+        </div>
+        <div class="form-check">
+            <label for="firsatmi" asp-for="Product.FirsatUrun">Fırsat ürünü mü?</label>
+            <input asp-for="Product.FirsatUrun" class="form-check-input" type="checkbox" id="firsatmi" />
+        </div>
+        <div class="form-group">
+            <label asp-for="MyImage">Ürün Kapak Görseli</label><br />
+            <input asp-for="MyImage" accept="image/*" class="form-control-file" />
+        </div>
+        <div class="form-group">
+            <label asp-for="MyImageList">Ürün Galerisi</label><br />
+            <input asp-for="MyImageList" multiple accept="image/*" class="form-control-file" />
+        </div>
+        <input type="submit" value="Ekle" class="btn btn-success" />
+    </form>
+</div>

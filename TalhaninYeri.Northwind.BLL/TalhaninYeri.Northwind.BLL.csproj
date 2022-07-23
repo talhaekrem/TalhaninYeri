@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TalhaninYeri.Core\TalhaninYeri.Core.csproj" />
+    <ProjectReference Include="..\TalhaninYeri.Northwind.DAL\TalhaninYeri.Northwind.DAL.csproj" />
+    <ProjectReference Include="..\TalhaninYeri.Northwind.Entities\TalhaninYeri.Northwind.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

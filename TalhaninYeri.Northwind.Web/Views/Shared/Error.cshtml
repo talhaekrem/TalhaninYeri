@@ -1,0 +1,12 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Hata";
+}
+
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>Hata Kodu:</strong> <code>@Model.RequestId</code>
+    </p>
+}
+<h3>Bir hata ile karşılaşıldı. Lütfen İletişime Geçiniz. <a asp-controller="Contact" asp-action="Index" asp-area="">İletişim</a></h3>

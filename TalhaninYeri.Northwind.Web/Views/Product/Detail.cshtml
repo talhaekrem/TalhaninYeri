@@ -1,0 +1,109 @@
+﻿@model ProductDetailModel
+@{
+    ViewData["Title"] = Model.ProductDetailPage.ProductName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string category = Model.Categories.Where(c => c.CategoryId == Model.ProductDetailPage.CategoryId).FirstOrDefault().CategoryName;
+}
+
+<link href="~/css/banner.css" rel="stylesheet" />
+<link href="~/css/products.css" rel="stylesheet" />
+
+<div class="position-relative">
+    <img class="PageBanner" src="~/Images/banners/product-detail-banner.jpg" />
+    <div class="bannerShadow"></div>
+    <div class="bannerText">
+        <span>Ürün Detay</span>
+    </div>
+</div>
+<div class="breadcrumbNav">
+    <nav aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb px-0 m-0">
+                <li class="breadcrumb-item"><a href="/">Anasayfa</a></li>
+                <li class="breadcrumb-item"><a asp-area="" asp-controller="Product" asp-action="Index">Ürünler</a></li>
+                <li class="breadcrumb-item"><a href="/Product/Index?category=@Model.ProductDetailPage.CategoryId">@category</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@Model.ProductDetailPage.ProductName</li>
+            </ol>
+        </div>
+    </nav>
+</div>
+
+
+<div class="container my-5">
+    <div class="row">
+
+        @if (TempData["message"] != null)
+        {
+        <div class="col-12">
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                @TempData["message"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+        }
+
+        <div class="col-12 col-lg-6">
+            <div class="row">
+                <div class="col-12 mb-3">
+                    <div class="mainPhoto">
+
+                        <div class="mainPhotoBlock">
+                            <a data-fancybox="gallery" href="~/img/product-thumb/@Model.ProductDetailPage.ImagePath">
+                                <img src="~/img/product-thumb/@Model.ProductDetailPage.ImagePath" onerror="this.src='/Images/resim-yok.jpg'" />
+                            </a>
+                        </div>
+                        @foreach (var image in Model.imageGallery)
+                        {
+                            <div class="mainPhotoBlock">
+                                <a data-fancybox="gallery" href="~/img/product-gallery/@image.Path">
+                                    <img src="~/img/product-gallery/@image.Path" onerror="this.src='/Images/resim-yok.jpg'" />
+                                </a>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="ProductGallery">
+                        <div class="m-1"><img src="~/img/product-thumb/@Model.ProductDetailPage.ImagePath" onerror="this.src='/Images/resim-yok.jpg'" /></div>
+                        @foreach (var image in Model.imageGallery)
+                        {
+                            <div class="m-1"><img src="~/img/product-gallery/@image.Path" onerror="this.src='/Images/resim-yok.jpg'" /></div>
+
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6">
+            <h6 class="text-muted">Ürün Kodu: @Model.ProductDetailPage.ProductId</h6>
+            <h2 class="mt-3 mt-lg-0">@Model.ProductDetailPage.ProductName</h2>
+            <h6><span class="price">@Model.ProductDetailPage.UnitPrice</span> <span class="font-weight-normal">TL</span></h6>
+
+            <form method="post">
+                <div class="my-3">
+                    <span class="input-number-decrement">–</span><input id="miktar" name="miktar" class="input-number" type="text" value="1" min="0" max="@Model.ProductDetailPage.UnitsInStock"><span class="input-number-increment">+</span>
+                </div>
+                <div>
+                    @{
+                        if (Model.ProductDetailPage.UnitsInStock == 0)
+                        {
+                            <button class="btn btn-warning disabled addToCartBtn" disabled>Sepete Ekle</button><br />
+                            <small class="text-muted">Ürün Stokta Kalmamıştır.</small>
+                        }
+                        else
+                        {
+                            <button class="btn btn-warning addToCartBtn notdisabled" type="submit" asp-action="AddToCart" asp-controller="Cart" asp-route-productId="@Model.ProductDetailPage.ProductId">Sepete Ekle</button>
+                        }
+                    }
+                </div>
+            </form>
+
+            <p class="py-3">@Model.ProductDetailPage.Description</p>
+        </div>
+    </div>
+</div>

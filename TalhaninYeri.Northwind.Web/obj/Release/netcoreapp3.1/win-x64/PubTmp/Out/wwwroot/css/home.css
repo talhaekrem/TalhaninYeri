@@ -1,0 +1,182 @@
+﻿/*BOOTSTRAP BREAKPOINTS--------------------------------*/
+@media (max-width:575px) {
+
+}
+
+@media (min-width: 576px) {
+
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 992px) {
+
+}
+
+@media (min-width: 1200px) {
+
+}
+
+@media (min-width: 1640px) {
+
+}
+
+/*carousel slider*/
+.carousel-item img{
+    height: calc(100vh - 80px) !important;
+}
+.open-sans {
+    font-family: 'Open Sans', sans-serif !important;
+}
+.carousel-text-shadow {
+    text-shadow: -1px 0 4px black;
+}
+.carousel-item img{
+    object-fit:cover;
+}
+.carousel-control-next, .carousel-control-prev{
+    width:10% !important;
+}
+.carousel-Overlay {
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0) 10%, rgba(255,255,255,0) 90%, rgba(0,0,0,0.5) 100%);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+}
+/*---------------------------------------------------------*/
+/*Categories-----------------------------------------------*/
+.category {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    height: 20rem;
+}
+
+    .category img {
+        width: 100%;
+        height: 100%;
+        object-fit:cover;
+        border-radius: inherit;
+        transition: all .3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+.categoriesImgOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #373737;
+    opacity: 0.4;
+    border-radius: inherit;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.categoryText {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+    text-align: center;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+    .categoryText span {
+        font-size: 30px;
+        font-weight: 500;
+    }
+
+    .categoryText p {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+.categoryLink:hover .citiesImgOverlay {
+    opacity: 1;
+}
+
+.categoryLink:hover img {
+    filter: blur(2px);
+    transform: scale(1.125);
+}
+
+.categoryLink:hover .categoryText {
+    transform: translate(-50%,-50%) scale(1.2);
+}
+/*-----------------------------------------------------*/
+
+/*Top Sale---------------------------------------------*/
+.TopSale {
+    background: rgb(36,4,153);
+    background: radial-gradient(circle, rgba(36,4,153,0.25) 0%, rgba(237,237,237,1) 74%);
+    position: relative;
+}
+.topSaleBg {
+    position: absolute;
+    object-fit: contain;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+    .topSaleImg {
+    height:auto;
+    width:100%;
+    object-fit: cover;
+    border-radius: 1rem;
+    }
+.TopSaleThumb{
+    height:330px !important;
+}
+
+.TopSaleGallery{
+    height:150px !important;
+}
+.topSaleGoToDetailLink {
+    color: #ededed !important;
+    background-color: #240499 !important;
+    border-color: #240499 !important;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border-radius: .5rem !important;
+}
+    .topSaleGoToDetailLink:hover {
+        color: #240499 !important;
+        background-color: #ededed !important;
+        border-color: #240499 !important;
+    }
+.slick-dots li {
+    margin: 0 !important;
+}
+
+.TopSaleSlick .slick-dots li button:before {
+    opacity: 1;
+    color: black;
+}
+
+.TopSaleSlick .slick-dots li.slick-active button:before {
+    opacity: 1;
+    color: #240499;
+}
+
+/*-----------------------------------------------------*/
+
+.goToShoppingLink{
+    color:#240499 !important;
+    font-size:1.25rem;
+    letter-spacing:.125rem;
+}
+.informationsBg{
+    background-color:#ededed;
+}
+.QualityInfo{
+    font-weight:400;
+    font-size:.75rem;
+    line-height:1.5 !important;
+    margin-bottom:0 !important;
+}

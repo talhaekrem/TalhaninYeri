@@ -1,0 +1,42 @@
+﻿@model CategoryModel
+@{
+    ViewData["Title"] = "Admin - Kategori Yönetimi";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@if (TempData["CategoryDeleteError"] != null)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        @TempData["CategoryDeleteError"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<div class="container my-5">
+    <h2>Kategori Listesi</h2>
+    <a class="btn btn-sm btn-success my-3" asp-area="" asp-controller="Admin" asp-action="CategoryAdd"><i class="fa fa-plus"></i> Yeni Kategori Ekle</a>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Kategori Adı</th>
+                    <th scope="col">Kategorideki Ürün Miktarı</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Categories)
+                {
+                    int productCount = Model.Products.Where(p => p.CategoryId == item.CategoryId).Count();
+                    <tr>
+                        <td>@item.CategoryName</td>
+                        <td>@productCount</td>
+                        <td><a class="btn btn-sm btn-info" asp-area="" asp-controller="Admin" asp-action="CategoryUpdate" asp-route-categoryId="@item.CategoryId"><i class="fas fa-sync-alt"></i> Güncelle</a></td>
+                        <td><a class="btn btn-sm btn-danger" asp-area="" asp-controller="Admin" asp-action="CategoryDelete" asp-route-categoryId="@item.CategoryId"><i class="fas fa-times"></i> Sil</a></td>
+                    </tr>
+                }
+                <tr><td colspan="4"><small>*Kategori silebilmeniz için sileceğiniz kategoriye ait ürün <strong>bulunmamalıdır!</strong></small></td></tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>

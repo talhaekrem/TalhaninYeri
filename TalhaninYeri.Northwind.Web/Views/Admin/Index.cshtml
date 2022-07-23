@@ -1,0 +1,110 @@
+﻿@model OrdersViewModel
+@{
+    ViewData["Title"] = "Talha'nın Yeri Admin Panel";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@{ 
+    int deliveredOrders = Model.allOrders.Where(o => o.IsDelivered == true).Count();
+    int pendingOrders = Model.allOrders.Where(o => o.IsDelivered == false).Count();
+    decimal totalMoney = Model.allOrders.Where(o=> o.IsDelivered == true).Sum(o => o.OrderTotal);
+    int soldProductCount = 0;
+    for(int i = 0; i < Model.Delivered.Count; i++)
+    {
+        soldProductCount = soldProductCount + Model.OrderDetails.Where(o => o.OrderID == Model.Delivered[i].OrderID).Sum(t => t.Quantity);
+    }
+}
+<div class="container my-5">
+    <h2>Dashboard</h2>
+    <div class="row">
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-header">Teslim Edilen Siparişler</div>
+                <div class="card-body"><b>@deliveredOrders</b></div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white" asp-controller="Admin" asp-action="OrderHistory">Geçmiş Siparişler</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-warning text-white mb-4">
+                <div class="card-header">Bekleyen Siparişler</div>
+                <div class="card-body"><b>@pendingOrders</b></div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white" href="#OrdersDT">Siparişleri Görüntüle</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-success text-white mb-4">
+                <div class="card-header">Toplam Kazanç</div>
+                <div class="card-body"><b><span class="price">@totalMoney</span> TL</b></div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <div class="small text-white">Toplam Kazanç</div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-secondary text-white mb-4">
+                <div class="card-header">Teslim Edilen Ürün Miktarı</div>
+                <div class="card-body"><b>@soldProductCount</b></div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <div class="small text-white">Teslim Edilen Ürün Miktarı</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    Bekleyen Siparişler
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="OrdersDT">
+                            <thead>
+                                <tr>
+                                    <th>Sipariş ID</th>
+                                    <th>Müşteri Ad Soyad</th>
+                                    <th>Telefon</th>
+                                    <th>E-posta</th>
+                                    <th>Adres</th>
+                                    <th>Sipariş Tarihi</th>
+                                    <th>Sipariş Tutarı</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model.Orders.OrderByDescending(x => x.OrderDate))
+                                {
+                                    <tr>
+                                        <td>@item.OrderID</td>
+                                        <td>@item.FirstName @item.LastName</td>
+                                        <td>@item.Phone</td>
+                                        <td>@item.Email</td>
+                                        <td>@item.Address / @item.City</td>
+                                        <td>@item.OrderDate</td>
+                                        <td class="text-success"><span class="price"><b>@item.OrderTotal</b></span> TL</td>
+                                        <td><a class="btn btn-sm btn-primary" asp-area="" asp-controller="Admin" asp-action="OrderDetail" asp-route-orderId="@item.OrderID"><i class="fas fa-external-link-alt"></i> Siparişi Görüntüle</a></td>
+                                        <td><a class="btn btn-sm btn-success" asp-area="" asp-controller="Admin" asp-action="OrderDelivered" asp-route-orderId="@item.OrderID"><i class="fas fa-check-square"></i> Teslim Edildi</a></td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

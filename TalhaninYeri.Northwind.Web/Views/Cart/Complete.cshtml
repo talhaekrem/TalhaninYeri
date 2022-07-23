@@ -1,0 +1,59 @@
+﻿@model OrderDetailsViewModel
+@{
+    ViewData["Title"] = "Sipariş Detayları";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container my-5">
+    <div class="row">
+        @if (TempData["message"] != null)
+        {
+            <div class="col-12">
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    @TempData["message"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        }
+        <div class="col-12 text-center">
+            <h2 class="py-3">Sipariş Bilgileriniz</h2>
+        </div>
+        <div class="col-12">
+            <form asp-controller="Cart" asp-action="Complete" method="post">
+
+                <div class="form-group">
+                    <label asp-for="OrderDetails.FirstName">Ad</label>
+                    <input asp-for="OrderDetails.FirstName" class="form-control" type="text" placeholder="Ad" />
+                    <span asp-validation-for="OrderDetails.FirstName"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="OrderDetails.LastName">Soyad</label>
+                    <input asp-for="OrderDetails.LastName" class="form-control" type="text" placeholder="Soyad" />
+                    <span asp-validation-for="OrderDetails.LastName"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="OrderDetails.Email">E-Posta</label>
+                    <input asp-for="OrderDetails.Email" class="form-control" type="email" placeholder="E-Posta" />
+                    <span asp-validation-for="OrderDetails.Email"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="OrderDetails.City">Şehir</label>
+                    <input asp-for="OrderDetails.City" class="form-control" type="text" placeholder="Şehir" />
+                    <span asp-validation-for="OrderDetails.City"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="OrderDetails.Address">Adres</label>
+                    <input asp-for="OrderDetails.Address" class="form-control" type="text" placeholder="Adres" />
+                    <span asp-validation-for="OrderDetails.Address"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="OrderDetails.Phone">Telefon</label>
+                    <input asp-for="OrderDetails.Phone" class="form-control" placeholder="Telefon" />
+                    <span asp-validation-for="OrderDetails.Phone"></span>
+                </div>
+                <input type="submit" value="Sipariş Oluştur" class="btn btn-success" />
+            </form>
+        </div>
+    </div>
+</div>

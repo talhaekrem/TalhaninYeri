@@ -1,0 +1,119 @@
+﻿@model ProductModel
+@addTagHelper "*,Microsoft.AspNetCore.Mvc.TagHelpers"
+@addTagHelper "*,TalhaninYeri.Northwind.Web"
+
+@{
+    ViewData["Title"] = "Ürünler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string activeCategory = Model.Categories.Where(c => c.CategoryId == Model.CurrentCategory).Select(f => f.CategoryName).FirstOrDefault();
+}
+<link href="~/css/card.css" rel="stylesheet" />
+<link href="~/css/banner.css" rel="stylesheet" />
+<link href="~/css/products.css" rel="stylesheet" />
+
+<div class="position-relative">
+    <img class="PageBanner" src="~/Images/banners/products-banner.jpg" />
+    <div class="bannerShadow"></div>
+    <div class="bannerText">
+        <span>Ürünler</span>
+    </div>
+</div>
+
+<div class="breadcrumbNav">
+    <nav aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb px-0 m-0">
+                <li class="breadcrumb-item"><a href="/">Anasayfa</a></li>
+
+                @if (activeCategory != null)
+                {
+                    <li class="breadcrumb-item"><a asp-controller="Product" asp-action="Index">Ürünler</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">@activeCategory</li>
+                }
+                else
+                {
+                    <li class="breadcrumb-item active" aria-current="page">Ürünler</li>
+
+                }
+
+
+            </ol>
+        </div>
+    </nav>
+</div>
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12 col-md-3 pt-3">
+            <div class="list-group">
+                <a id="tumUrunler" href="/Product/Index" class="list-group-item list-group-item-secondary list-group-item-action">Tüm Ürünler</a>
+                @foreach (var category in Model.Categories)
+                {
+                    var css = "list-group-item list-group-item-secondary list-group-item-action ";
+                    if (category.CategoryId == Model.CurrentCategory)
+                    {
+                        css += " active";
+                    }
+                    <a href="/Product/Index?category=@category.CategoryId" class="@css">@category.CategoryName</a>
+                }
+            </div>
+        </div>
+        <div class="col-12 col-md-9">
+            <div class="row">
+                @foreach (var product in Model.Products)
+                {
+                    <div class="col-12 col-sm-6 col-lg-4 p-3">
+                        <a class="productLink" asp-area="" asp-controller="Product" asp-action="Detail" asp-route-productId="@product.ProductId">
+                            <div class="productCard">
+                                <div class="ImgContainer">
+                                    <img src="~/img/product-thumb/@product.ImagePath" onerror="this.src='/Images/resim-yok.jpg'" />
+                                    <div class="ImgShadow"></div>
+                                    @{
+                                        if (product.UnitsInStock < 20 && product.UnitsInStock != 0)
+                                        {
+                                            <span class="imgOverInfo">Son @product.UnitsInStock Ürün</span>
+                                        }
+                                        else if (product.UnitsInStock == 0)
+                                        {
+                                            <span class="imgOverInfo bg-secondary text-white">Stokta Yok</span>
+                                        }
+                                    }
+                                    @{
+                                        if (product.FirsatUrun == true)
+                                        {
+                                            <span class="FirsatUrun">Fırsat <i class="fa fa-star"></i></span>
+                                        }
+                                    }
+                                </div>
+                                <div class="ProductCardContent">
+                                    @{
+                                        string categoryName = Model.Categories.Where(c => c.CategoryId == product.CategoryId).FirstOrDefault().CategoryName;
+                                    }
+                                    <p class="homeType">@categoryName</p>
+                                    <p>
+                                        @product.ProductName
+                                    </p>
+                                    <span><span class="price">@product.UnitPrice</span> <span class="font-weight-normal">TL</span></span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+        <div class="col-12 mt-3">
+            <product-list-pager class="text-secondary"
+                                current-category-paging="@Model.CurrentCategoryPaging"
+                                current-page="@Model.CurrentPage"
+                                page-count="@Model.PageCount"
+                                page-size="@Model.PageSize"></product-list-pager>
+        </div>
+    </div>
+</div>
+<script>
+    var path = window.location.search;
+    if (path == "") {
+        document.getElementById("tumUrunler").classList.add("active");
+    }
+</script>

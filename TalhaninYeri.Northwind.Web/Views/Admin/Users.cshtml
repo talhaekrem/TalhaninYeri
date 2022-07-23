@@ -1,0 +1,30 @@
+﻿@model UserViewModel
+@{
+    ViewData["Title"] = "Admin - Üyeler";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container my-5">
+    <h2>Siteye Kayıtlı Kullanıcılar</h2>
+    <div class="table-responsive">
+        <table id="usersDT">
+            <thead>
+                <tr>
+                    <th>Kullanıcı ID</th>
+                    <th>Kullanıcı Adı</th>
+                    <th>E-Posta</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.User)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.UserName</td>
+                        <td>@item.Email</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+﻿@model ProductModel
+@addTagHelper "*,Microsoft.AspNetCore.Mvc.TagHelpers"
+@addTagHelper "*,TalhaninYeri.Northwind.Web"
+
+@{
+    ViewData["Title"] = "Ara - " + ViewBag.Search;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/card.css" rel="stylesheet" />
+<link href="~/css/banner.css" rel="stylesheet" />
+<link href="~/css/products.css" rel="stylesheet" />
+
+<div class="position-relative">
+    <img class="PageBanner" src="~/Images/banners/search-result-banner.jpg" />
+    <div class="bannerShadow"></div>
+    <div class="bannerText">
+        <span>"@ViewBag.Search" İçin Arama Sonucu</span>
+    </div>
+</div>
+
+<div class="breadcrumbNav">
+    <nav aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb px-0 m-0">
+                <li class="breadcrumb-item"><a href="/">Anasayfa</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Arama Sonucu</li>
+            </ol>
+        </div>
+    </nav>
+</div>
+<div class="container my-5">
+    <div class="row">
+        @if (ViewBag.Search != null)
+        {
+            @if (ViewBag.Count == 0)
+            {
+                <div class="col-12 text-center">
+                    <h3>"@ViewBag.Search" aramanıza ait ürün bulunmamaktadır.</h3>
+                </div>
+            }
+            else
+            {
+                <div class="col-12 text-center border-bottom pb-2">
+                    <b>"@ViewBag.Search"</b> ile ilgili  <b>@ViewBag.Count</b> arama sonucu bulundu.
+                </div>
+
+                <div class="col-12">
+                    <div class="row">
+                        @foreach (var product in Model.Products)
+                        {
+                            <div class="col-6 col-lg-4 p-3">
+                                <a class="productLink" asp-area="" asp-controller="Product" asp-action="Detail" asp-route-productId="@product.ProductId">
+                                    <div class="productCard">
+                                        <div class="ImgContainer">
+                                            <img src="~/img/product-thumb/@product.ImagePath" onerror="this.src='/Images/resim-yok.jpg'" />
+                                            <div class="ImgShadow"></div>
+                                            @{
+                                                if (product.UnitsInStock < 20 && product.UnitsInStock != 0)
+                                                {
+                                                    <span class="imgOverInfo">Son @product.UnitsInStock Ürün</span>
+                                                }
+                                                else if (product.UnitsInStock == 0)
+                                                {
+                                                    <span class="imgOverInfo bg-secondary text-white">Stokta Yok</span>
+                                                }
+                                            }
+                                            @{
+                                                if (product.FirsatUrun == true)
+                                                {
+                                                    <span class="FirsatUrun">Fırsat <i class="fa fa-star"></i></span>
+                                                }
+                                            }
+                                        </div>
+                                        <div class="ProductCardContent">
+                                            @{
+                                                string categoryName = Model.Categories.Where(c => c.CategoryId == product.CategoryId).FirstOrDefault().CategoryName;
+                                            }
+                                            <p class="homeType"><small>@categoryName</small></p>
+                                            <p class="font-weight-bold">
+                                                @product.ProductName
+                                            </p>
+                                            <p>@product.Description</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center">
+                <h2>Arama kısmı boş</h2>
+            </div>
+        }
+    </div>
+</div>

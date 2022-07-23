@@ -1,0 +1,57 @@
+﻿@model SiteSettingsModel
+@{
+    ViewData["Title"] = "Admin - Site Ayarları";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container my-5">
+    <h2>Site Ayarları</h2>
+    <form asp-controller="Admin" asp-action="SiteSettings" method="post">
+        <div class="form-group">
+            <label asp-for="siteSetting.SiteName">Site Adı</label>
+            <input asp-for="siteSetting.SiteName" class="form-control" type="text" placeholder="Site Adı" />
+            <span asp-validation-for="siteSetting.SiteName"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="siteSetting.Description">Site Açıklaması</label>
+            <textarea asp-for="siteSetting.Description" class="form-control" rows="3" placeholder="Site Açıklaması"></textarea>
+            <span asp-validation-for="siteSetting.Description"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="siteSetting.Phone">Telefon</label>
+            <input asp-for="siteSetting.Phone" class="form-control" type="tel" placeholder="Telefon" />
+            <span asp-validation-for="siteSetting.Phone"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="siteSetting.Address">Adres</label>
+            <input asp-for="siteSetting.Address" class="form-control" type="text" placeholder="Adres" />
+            <span asp-validation-for="siteSetting.Address"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="siteSetting.Email">E-Posta</label>
+            <input asp-for="siteSetting.Email" class="form-control" type="email" placeholder="E-Posta" />
+            <span asp-validation-for="siteSetting.Email"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="siteSetting.Instagram">Instagram</label>
+            <input asp-for="siteSetting.Instagram" class="form-control" type="text" placeholder="Instagram" />
+            <span asp-validation-for="siteSetting.Instagram"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="siteSetting.Twitter">Twitter</label>
+            <input asp-for="siteSetting.Twitter" class="form-control" type="text" placeholder="Twitter" />
+            <span asp-validation-for="siteSetting.Twitter"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="siteSetting.Youtube">Youtube</label>
+            <input asp-for="siteSetting.Youtube" class="form-control" type="text" placeholder="Youtube" />
+            <span asp-validation-for="siteSetting.Youtube"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="siteSetting.GoogleMap">Google Haritalar Konumu</label>
+            <input asp-for="siteSetting.GoogleMap" class="form-control" type="text" placeholder="Google haritalarda seçili konumun paylaş kısmındaki harita yerleştirmede src='' yazan kısım" />
+            <span asp-validation-for="siteSetting.GoogleMap"></span>
+        </div>
+        <input type="hidden" asp-for="siteSetting.SiteSettingId" />
+        <input type="submit" value="Güncelle" class="btn btn-info" />
+    </form>
+</div>

@@ -1,0 +1,37 @@
+﻿@model SliderModel
+@{
+    ViewData["Title"] = "Admin - Slider Yönetimi";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container my-5">
+    <h2>Slider Listesi</h2>
+    <a class="btn btn-sm btn-success my-3" asp-area="" asp-controller="Admin" asp-action="SliderAdd"><i class="fa fa-plus"></i> Yeni Slider Ekle</a>
+    <div class="table-responsive">
+        <table id="sliderDT">
+            <thead>
+                <tr>
+                    <th>Slider Resmi</th>
+                    <th>Başlık</th>
+                    <th>Açıklama</th>
+                    <th>Resim Sırası</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Sliders.OrderBy(s => s.OrderNumber))
+                {
+                    <tr>
+                        <td><img class="cartListImg" src="~/Images/sliders/@item.ImagePath" onerror="this.src='/Images/resim-yok.jpg'" /></td>
+                        <td>@item.Title</td>
+                        <td>@item.Description</td>
+                        <td>@item.OrderNumber</td>
+                        <td><a class="btn btn-sm btn-info" asp-area="" asp-controller="Admin" asp-action="SliderUpdate" asp-route-sliderId="@item.SliderId"><i class="fas fa-sync-alt"></i> Güncelle</a></td>
+                        <td><a class="btn btn-sm btn-danger" asp-area="" asp-controller="Admin" asp-action="SliderDelete" asp-route-sliderId="@item.SliderId"><i class="fas fa-times"></i> Sil</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>    
+    
+</div>
